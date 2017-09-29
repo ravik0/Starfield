@@ -15,65 +15,105 @@ void draw() {
     bill[i].move();
   }
 }
+void mousePressed() {
+  for (int i = 0; i < bill.length; i++) {
+    bill[i].speedIncrease();
+  }
+}
+void keyPressed() {
+  if (keyCode == SHIFT) {
+    for (int i = 0; i < bill.length; i++) {
+      bill[i].speedDecrease();
+    }
+  }
+}
 class NormalParticle implements Particle {
-  double myX, myY, speedX, speedY, angle;
+  double myX, myY, speed, angle;
+  double size = 5;
   color particleColor = color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
   NormalParticle() {
     myX = 200;
     myY = 200;
     angle = Math.random()*(2*Math.PI);
-    speedX = Math.random()*5;
-    speedY = Math.random()*5;
+    speed = Math.random()*5;
   }
   public void move() {
-    myX+=Math.cos(angle)*speedX;
-    myY+=Math.sin(angle)*speedY;
+    myX+=Math.cos(angle)*speed;
+    myY+=Math.sin(angle)*speed;
+    if (myX >= 400 || myY >= 400 || myX <= 0 || myY <= 0) {
+      speed = -speed;
+    }
+  }
+  public void speedIncrease() {
+    if (speed < 0) {
+      speed-=1;
+    }
+    if (speed >= 0) {
+      speed+=1;
+    }
+  }
+  public void speedDecrease() {
+    if (speed < 0) {
+      speed+=1;
+    }
+    if (speed >= 0) {
+      speed-=1;
+    }
   }
   public void show() {
     fill(particleColor);
-    ellipse((int)myX,(int)myY,5,5);
+    ellipse((int)myX,(int)myY,(float)size,(float)size);
   }
 }
 interface Particle {
   public void move();
   public void show();
+  public void speedIncrease();
+  public void speedDecrease();
 }
 class OddballParticle implements Particle{
-  double myX, myY, speedX, speedY, angle;
+  double myX, myY, speed, angle;
   color particleColor = color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
   OddballParticle() {
     myX = 300;
     myY = 200;
     angle = Math.random()*(2*Math.PI);
-    speedX = Math.random()*5;
-    speedY = Math.random()*5;
+    speed = Math.random()*10+5;
   }
   public void move() {
-      myX+=Math.cos(angle)*speedX;
-      myY+=Math.sin(angle)*speedY;
+    myX+=Math.cos(angle)*speed;
+    myY+=Math.sin(angle)*speed;
     if (myX >= 400) {
       myX=Math.random()*401;
       angle = Math.random()*(2*Math.PI);
-      speedX = Math.random()*5;
-      speedY = Math.random()*5;
     }
     else if (myX <= 0) {
       myX=Math.random()*401;
       angle = Math.random()*(2*Math.PI);
-      speedX = Math.random()*5;
-      speedY = Math.random()*5;
     }
     else if (myY >= 400) {
       myY=Math.random()*401;
       angle = Math.random()*(2*Math.PI);
-      speedX = Math.random()*5;
-      speedY = Math.random()*5;
     }
     else if (myY <= 0) {
       myY=Math.random()*401;
       angle = Math.random()*(2*Math.PI);
-      speedX = Math.random()*5;
-      speedY = Math.random()*5;
+    }
+  }
+  public void speedIncrease() {
+    if (speed < 0) {
+      speed-=1;
+    }
+    if (speed >= 0) {
+      speed+=1;
+    }
+  }
+  public void speedDecrease() {
+    if (speed < 0) {
+      speed+=1;
+    }
+    if (speed >= 0) {
+      speed-=1;
     }
   }
   public void show() {
@@ -81,7 +121,7 @@ class OddballParticle implements Particle{
     rect((int)myX,(int)myY,10,15);
   }
 }
-class JumboParticle extends OddballParticle {
+class JumboParticle extends NormalParticle {
   public void show() {
     fill(particleColor);
     ellipse((int)myX,(int)myY,50,50);
