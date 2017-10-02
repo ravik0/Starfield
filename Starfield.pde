@@ -1,8 +1,8 @@
 Particle[] bill;
 void setup() {
   size(400,400);
-  bill = new Particle[50];
-  for (int i = 2; i < bill.length; i++) {
+  bill = new Particle[100];
+  for (int i = 0; i < bill.length; i++) {
     bill[0] = new OddballParticle();
     bill[1] = new JumboParticle();
     bill[i] = new NormalParticle();
@@ -125,5 +125,10 @@ class JumboParticle extends NormalParticle {
   public void show() {
     fill(particleColor);
     ellipse((int)myX,(int)myY,50,50);
+    fill(1/particleColor);
+    ellipse((int)myX-10,(int)myY-10,5,5);
+    ellipse((int)myX+10,(int)myY-10,5,5);
+    noFill();
+    arc((int)myX-10,(int)myY,20,10,-PI,0);
   }
 }
