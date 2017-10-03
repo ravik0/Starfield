@@ -70,6 +70,7 @@ class NormalParticle implements Particle {
     myY = 200;
     angle = Math.random()*(2*Math.PI);
     speed = Math.random()*5;
+    particleColor = color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
   }
   public void show() {
     fill(particleColor);
@@ -133,6 +134,7 @@ class OddballParticle implements Particle{
     myY = 200;
     angle = Math.random()*(2*Math.PI);
     speed = Math.random()*5;
+    particleColor = color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
   }
   public void show() {
     fill(particleColor);
