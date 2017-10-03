@@ -26,6 +26,11 @@ void keyPressed() {
       bill[i].speedDecrease();
     }
   }
+  else if (keyCode == ENTER) {
+    for (int i = 0; i < bill.length; i++) {
+      bill[i].reset();
+    }
+  }
 }
 class NormalParticle implements Particle {
   double myX, myY, speed, angle;
@@ -60,6 +65,12 @@ class NormalParticle implements Particle {
       speed-=1;
     }
   }
+  public void reset() {
+    myX = 200;
+    myY = 200;
+    angle = Math.random()*(2*Math.PI);
+    speed = Math.random()*5;
+  }
   public void show() {
     fill(particleColor);
     ellipse((int)myX,(int)myY,(float)size,(float)size);
@@ -70,6 +81,7 @@ interface Particle {
   public void show();
   public void speedIncrease();
   public void speedDecrease();
+  public void reset();
 }
 class OddballParticle implements Particle{
   double myX, myY, speed, angle;
@@ -115,6 +127,12 @@ class OddballParticle implements Particle{
     if (speed >= 0) {
       speed-=1;
     }
+  }
+  public void reset() {
+    myX = 300;
+    myY = 200;
+    angle = Math.random()*(2*Math.PI);
+    speed = Math.random()*5;
   }
   public void show() {
     fill(particleColor);
